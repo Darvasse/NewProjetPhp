@@ -18,7 +18,7 @@ catch (Exception $e)
 <html>
 
     <head>
-        <link rel="stylesheet" href="connectionstyle.css">
+        <link rel="stylesheet" href="../CSS/connectionstyle.css">
         <title>Page de connection</title>
         <meta charset="utf-8" />
     </head>
