@@ -13,7 +13,7 @@ $app = new App($container);
 
 $app->setService('database', new Database(
     "localhost",
-    "steam",
+    "connection",
     "root",
     ""
 ));
