@@ -16,7 +16,7 @@ catch (Exception $e)
 
 $reqValidation = $bdd->prepare('SELECT * FROM users WHERE pseudo = :pseudo'); //recuperation du champ correspondant au pseudo
 $reqValidation->execute(array(
-	'pseudo' => $_POST['pseudo']
+	'pseudo' => htmlspecialchars($_POST['pseudo'])
 ));
 
 
@@ -26,7 +26,7 @@ if (password_verify($_POST['mdp'],$result['password'] )) //Vérification du hash
 {
 	
 
-    header('location:site.php'); //Redirection vers le site
+    header('location:../site.php'); //Redirection vers le site
     
     $_SESSION['id'] = $result['userid'];
     $_SESSION['pseudo'] = $result['pseudo'];

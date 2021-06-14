@@ -16,16 +16,16 @@ catch (Exception $e)
 
 $reqRec = $bdd->prepare('INSERT INTO users(pseudo,password) VALUES(:pseudo,:password)'); //Enregistrer un utilisateur dans la BDD
 $reqPseudo = $bdd->prepare('SELECT * FROM users WHERE pseudo = :pseudo'); //Vérification du pseudo
-$reqPseudo->execute(array('pseudo' => $_POST['pseudo']));
+$reqPseudo->execute(array('pseudo' => htmlspecialchars($_POST['pseudo'])));
 
 if ($reqPseudo->rowCount() > 0) { //Vérification de l'existence du pseudo
     echo "Pseudo utilisé";
 } else {
     $reqRec->execute(array(
-            'pseudo' => $_POST['pseudo'],
+            'pseudo' => htmlspecialchars($_POST['pseudo']),
             'password' => password_hash($_POST['mdp'],PASSWORD_BCRYPT)
             )); //Envois du pseudo et mdp à la BDD
-    header('location:site.php'); //Redirection vers le site
+    header('location:../site.php'); //Redirection vers le site
 
 }
 
