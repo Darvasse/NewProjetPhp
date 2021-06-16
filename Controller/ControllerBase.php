@@ -22,7 +22,7 @@ abstract class ControllerBase
         }
 
         ob_start();
-        include __DIR__ . '/../view/' . $template . '.php';
+        include __DIR__ . '/../View/' . $template . '.php';
         ob_end_flush();
         die();
     }

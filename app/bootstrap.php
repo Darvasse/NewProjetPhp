@@ -4,14 +4,14 @@ namespace App;
 use App\Src\App;
 use App\Routing;
 use App\Src\ServiceContainer\ServiceContainer;
-use Controller\SteamController;
+//use Controller\SteamController;
 use Database\Database;
 use Model\SteamModel;
 
 $container = new ServiceContainer();
 $app = new App($container);
 
-$app->setService('database', new Database(
+$app->setService('Database', new Database(
     "localhost",
     "connection",
     "root",
@@ -19,7 +19,7 @@ $app->setService('database', new Database(
 ));
 
 $app->setService('steamModel', new SteamModel(
-    $app->getService('database')
+    $app->getService('Database')
 ));
 
 $routing = new Routing($app);

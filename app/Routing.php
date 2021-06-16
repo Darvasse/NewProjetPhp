@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Controller\CityController;
+use Controller\SteamController;
 use Controller\CountryController;
 use App\Src\App;
 
@@ -28,18 +28,18 @@ class Routing
         });
 
         /*$this->app->get('/city/(\d+)', function ($id) use ($app){
-            $controller = new CityController($app);
-            $controller->cityHandler($id);
+            $Controller = new CityController($app);
+            $Controller->cityHandler($id);
         });
 
         $this->app->get('/countries', function () use ($app){
-            $controller = new CountryController($app);
-            $controller->countriesHandler();
+            $Controller = new CountryController($app);
+            $Controller->countriesHandler();
         });
 
         $this->app->get('/country/(\w+)', function ($name) use ($app){
-            $controller = new CountryController($app);
-            $controller->countryHandler($name);
+            $Controller = new CountryController($app);
+            $Controller->countryHandler($name);
         });*/
     }
 }
