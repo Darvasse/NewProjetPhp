@@ -16,5 +16,4 @@ class Autoloader{
         $class = implode('/', $nameSpace);
         require_once '..' . DS . $class.'.php';
     }
-
 }

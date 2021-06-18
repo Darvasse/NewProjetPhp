@@ -7,7 +7,7 @@ session_start();
 <?php
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root', ''); //Connection à la BDD
+    $bdd = new PDO('mysql:host=localhost;dbname=projetphp;charset=utf8', 'root', ''); //Connection à la BDD
 }
 catch (Exception $e)
 {
@@ -26,7 +26,7 @@ catch (Exception $e)
     <body>     
         <form method="post" action="validationIConnection.php">
             <h2>Connectez vous</h2>
-            Pseudo : <input type="text" name="pseudo" class="pseudoInput" required/>
+            Email : <input type="email" name="email" class="emailInput" required/>
             <br/>
             Mot de passe : <input type="password" name="mdp" class="passwordInput" required/>
             <br/>

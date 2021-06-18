@@ -7,7 +7,7 @@ session_start();
 <?php
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root', '');
+    $bdd = new PDO('mysql:host=localhost;dbname=projetphp;charset=utf8', 'root', '');
 }
 catch (Exception $e)
 {
@@ -31,6 +31,8 @@ catch (Exception $e)
             Pseudo : <input type="text" name="pseudo" class="pseudoInput" required/>
             <br/>
             Mot de passe : <input type="password" name="mdp" class="passwordInput" required/>
+            <br/>
+            Email : <input type="email" name="email" class="emailInput" required/>
             <br/>
             <br/>
             <input type="submit" value="Valider" class="submit"/>

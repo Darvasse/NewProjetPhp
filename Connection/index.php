@@ -31,9 +31,4 @@ catch (Exception $e)
 
     </body>
 
-    <footer>
-        <?php include("footer.php"); ?>
-
-    </footer>
-
 </html>

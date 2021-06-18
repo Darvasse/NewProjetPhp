@@ -7,16 +7,16 @@ session_start();
 <?php
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root', ''); //Connection à la BDD
+    $bdd = new PDO('mysql:host=localhost;dbname=projetphp;charset=utf8', 'root', ''); //Connection à la BDD
 }
 catch (Exception $e)
 {
         die('Erreur : ' . $e->getMessage()); //Recup des erreurs
 }
-
-$reqValidation = $bdd->prepare('SELECT * FROM users WHERE pseudo = :pseudo'); //recuperation du champ correspondant au pseudo
+session_unset();
+$reqValidation = $bdd->prepare('SELECT id,username,password,email FROM users WHERE email = :email'); //recuperation du champ correspondant au pseudo
 $reqValidation->execute(array(
-	'pseudo' => htmlspecialchars($_POST['pseudo'])
+	'email' => htmlspecialchars($_POST['email'])
 ));
 
 
@@ -28,9 +28,10 @@ if (password_verify($_POST['mdp'],$result['password'] )) //Vérification du hash
 
     header('location:../site.php'); //Redirection vers le site
     
-    $_SESSION['id'] = $result['userid'];
-    $_SESSION['pseudo'] = $result['pseudo'];
+    $_SESSION['id'] = $result['id'];
+    $_SESSION['pseudo'] = $result['username'];
     $_SESSION['password'] = $result['password'];
+    $_SESSION['email'] = $result['email'];
 
 } 
 

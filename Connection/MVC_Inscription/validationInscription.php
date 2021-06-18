@@ -7,24 +7,25 @@ session_start();
 <?php
 try
 {
-    $bdd = new PDO('mysql:host=localhost;dbname=connection;charset=utf8', 'root', ''); //Connection à la BDD
+    $bdd = new PDO('mysql:host=localhost;dbname=projetphp;charset=utf8', 'root', ''); //Connection à la BDD
 }
 catch (Exception $e)
 {
         die('Erreur : ' . $e->getMessage()); //Recup des erreurs
 }
+session_unset();
+$reqRec = $bdd->prepare('INSERT INTO users(username,password,email) VALUES(:username,:password,:email)'); //Enregistrer un utilisateur dans la BDD
+$reqEmail = $bdd->prepare('SELECT email FROM users WHERE email = :email'); //Vérification du pseudo
+$reqEmail->execute(array('email' => htmlspecialchars($_POST['email'])));
 
-$reqRec = $bdd->prepare('INSERT INTO users(pseudo,password) VALUES(:pseudo,:password)'); //Enregistrer un utilisateur dans la BDD
-$reqPseudo = $bdd->prepare('SELECT * FROM users WHERE pseudo = :pseudo'); //Vérification du pseudo
-$reqPseudo->execute(array('pseudo' => htmlspecialchars($_POST['pseudo'])));
-
-if ($reqPseudo->rowCount() > 0) { //Vérification de l'existence du pseudo
-    echo "Pseudo utilisé";
+if ($reqEmail->rowCount() > 0) { //Vérification de l'existence du pseudo
+    echo "Email utilisé";
 } else {
     $reqRec->execute(array(
-            'pseudo' => htmlspecialchars($_POST['pseudo']),
-            'password' => password_hash($_POST['mdp'],PASSWORD_BCRYPT)
-            )); //Envois du pseudo et mdp à la BDD
+            'username' => htmlspecialchars($_POST['pseudo']),
+            'password' => password_hash($_POST['mdp'],PASSWORD_BCRYPT),
+            'email' => htmlspecialchars($_POST['email'])
+            )); //Envois du pseudo mdp et email à la BDD
     header('location:../site.php'); //Redirection vers le site
 
 }

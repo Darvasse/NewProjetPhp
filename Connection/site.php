@@ -41,13 +41,10 @@ catch (Exception $e)
         ?> !</p>
         <a href="page3.php">Destroy session</a>
         <a href="page2">Clic batard </a>
+        <a href="profile.php">Profile</a>
         <br/>
         
 
     </body>
-    <footer>
-        <?php include("footer.php"); ?>
-
-    </footer>
 
 </html>
