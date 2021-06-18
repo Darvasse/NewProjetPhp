@@ -14,6 +14,6 @@ class SteamController extends ControllerBase
 
     public function homeHandler()
     {
-        //TODO
+        $this->render('MainView');
     }
 }
