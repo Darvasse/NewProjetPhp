@@ -27,6 +27,24 @@ class Routing
             $controller->homeHandler();
         });
 
+        $app = $this->app;
+        $this->app->get('/magasin', function () use ($app){
+            $controller = new SteamController($app);
+            $controller->gamesHandler();
+        });
+
+        $this->app->post('/magasin', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->gamesSearch();
+        });
+
+        $this->app->get('/jeu/(\w+)', function ($name) use ($app){
+            $Controller = new SteamController($app);
+            $Controller->gameHandler($name);
+        });
+
+
+
         /*$this->app->get('/city/(\d+)', function ($id) use ($app){
             $Controller = new CityController($app);
             $Controller->cityHandler($id);

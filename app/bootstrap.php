@@ -13,7 +13,7 @@ $app = new App($container);
 
 $app->setService('Database', new Database(
     "localhost",
-    "connection",
+    "projetphp",
     "root",
     ""
 ));

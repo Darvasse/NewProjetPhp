@@ -16,4 +16,23 @@ class SteamController extends ControllerBase
     {
         $this->render('MainView');
     }
+
+    public function gamesHandler()
+    {
+        $games = $this->app->getService('steamModel')->getAllGames();
+        $this->render('magasin', ["games" => $games]);
+    }
+
+    public function gameHandler($name)
+    {
+        $game = $this->app->getService('steamModel')->getOneGame($name);
+        $this->render('jeu', $game);
+    }
+
+    public function gamesSearch()
+    {
+        $name = $_POST['name'];
+        $games = $this->app->getService('steamModel')->searchByName($name);
+        $this->render('magasin', ["games" => $games]);
+    }
 }
