@@ -29,10 +29,16 @@ class SteamController extends ControllerBase
         $this->render('jeu', $game);
     }
 
-    public function gamesSearch()
+    public function gamesSearchByName()
     {
         $name = $_POST['name'];
         $games = $this->app->getService('steamModel')->searchByName($name);
+        $this->render('magasin', ["games" => $games]);
+    }
+
+    public function gamesSearchByCategory($category)
+    {
+        $games = $this->app->getService('steamModel')->searchByCategory($category);
         $this->render('magasin', ["games" => $games]);
     }
 }

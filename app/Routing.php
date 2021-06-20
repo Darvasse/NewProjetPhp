@@ -35,7 +35,12 @@ class Routing
 
         $this->app->post('/magasin', function () use ($app){
             $Controller = new SteamController($app);
-            $Controller->gamesSearch();
+            $Controller->gamesSearchByName();
+        });
+
+        $this->app->get('/magasin/(\w+)', function ($category) use ($app){
+            $Controller = new SteamController($app);
+            $Controller->gamesSearchByCategory($category);
         });
 
         $this->app->get('/jeu/(\w+)', function ($name) use ($app){
