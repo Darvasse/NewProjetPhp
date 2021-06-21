@@ -128,7 +128,7 @@ class App
             }
         }
 
-        throw new Error('No routes available for this uri');
+        throw new \Error('No routes available for this uri');
     }
 
     /**
@@ -145,7 +145,7 @@ class App
         } catch (HttpException $e) {
             throw $e;
         }catch (\Exception $e){
-            throw new Error('There was an Error during the processing of your request');
+            throw new \Error('There was an Error during the processing of your request');
         }
     }
 

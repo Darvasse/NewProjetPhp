@@ -40,4 +40,8 @@ class SteamModel
         $query->execute([':search' => $category]);
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
+    public function validationConnection($email, $password)
+    {
+        
+    }
 }

@@ -7,10 +7,12 @@
 			echo "Bienvenue " . $_SESSION["pseudo"];
 		}
 		else {
-			echo "<div>
-                	<button>Connection</button>
-                	<button>Inscription</button>
-        		</div>";
+			?>
+				<div>
+                	<button onclick="window.location.href = '/connection'">Connection</button>
+                	<button onclick="window.location.href = '/inscription'">Inscription</button>
+        		</div>
+			<?php
 		}
 		?>
 	<hr/>
