@@ -6,6 +6,7 @@
 charset=utf-8" />
     <title>Nouveau Steam</title>
 </head>
+<?php include "header.php"?>
 <body>
 <h1>Nouveau Steam</h1>
 
