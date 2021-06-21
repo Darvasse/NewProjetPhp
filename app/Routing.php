@@ -51,6 +51,10 @@ class Routing
             $Controller = new SteamController($app);
             $Controller->renderConnection();
         });
+        $this->app->post('/connection/validation', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->validationConnection();
+        });
         $this->app->get('/inscription', function () use ($app){
             $Controller = new SteamController($app);
             $Controller->renderInscription();

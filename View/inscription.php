@@ -6,7 +6,7 @@
     </head>
 
     <body>
-        <form method="post" action="" >
+        <form method="post" action="/inscription/validation" >
             <h2>Inscription</h2>
             Pseudo : <input type="text" name="pseudo" class="pseudoInput" required/>
             <br/>

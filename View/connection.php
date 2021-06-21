@@ -6,7 +6,7 @@
     </head>
 
     <body>     
-        <form method="post" action="">
+        <form method="post" action="/connection/validation">
             <h2>Connectez vous</h2>
             Email : <input type="email" name="email" class="emailInput" required/>
             <br/>

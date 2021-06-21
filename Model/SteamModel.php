@@ -67,4 +67,24 @@ class SteamModel
             )); //Envois du pseudo mdp et email à la BDD
         }
     }
+    public function validationConnection($email, $password) {
+        session_start();
+        //session_unset();
+        $reqValidation = $this->conn->prepare('SELECT id,username,password,email FROM users WHERE email = ?'); //recuperation du champ correspondant au pseudo
+        $reqValidation->execute(array(
+            htmlspecialchars($email)
+        ));
+        $result = $reqValidation->fetch(\PDO::FETCH_ASSOC);
+        if (password_verify($password,$result['password'] )) //Vérification du hash
+        {        
+            $_SESSION['id'] = $result['id'];
+            $_SESSION['pseudo'] = $result['username'];
+            $_SESSION['password'] = $result['password'];
+            $_SESSION['email'] = $result['email'];
+        }
+        else
+        {
+            echo "Identifiants invalides";
+        }
+    }
 }
