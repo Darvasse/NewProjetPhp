@@ -47,7 +47,6 @@ class Routing
             $Controller = new SteamController($app);
             $Controller->gameHandler($name);
         });
-
         $this->app->get('/connection', function () use ($app){
             $Controller = new SteamController($app);
             $Controller->renderConnection();
@@ -55,6 +54,10 @@ class Routing
         $this->app->get('/inscription', function () use ($app){
             $Controller = new SteamController($app);
             $Controller->renderInscription();
+        });
+        $this->app->post('/inscription/validation', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->validationInscription();
         });
 
 

@@ -42,7 +42,11 @@ class SteamController extends ControllerBase
         $games = $this->app->getService('steamModel')->searchByCategory($category);
         $this->render('magasin', ["games" => $games]);
     }
+    public function deleteGame()
+    {
 
+
+    }
     public function renderConnection()
     {
         $this->render('connection');
@@ -51,9 +55,8 @@ class SteamController extends ControllerBase
     {
         $this->render('inscription');
     }
-    public function deleteGame()
+    public function validationInscription()
     {
-
-
+        $user = $this->app->getService('steamModel')->validationInscription($_POST["email"], $_POST["mdp"], $_POST["pseudo"]);
     }
 }

@@ -47,8 +47,24 @@ class SteamModel
         $query->execute([':search' => $category]);
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
-    public function validationConnection($email, $password)
+    public function validationInscription($email, $password, $pseudo)
     {
-        
+        $verify = $this->conn->prepare('SELECT email FROM users WHERE email = :email');
+        $add = $this->conn->prepare('INSERT INTO users(username,password,email) VALUES(:username,:password,:email)');
+        $verify->execute(array('email' => htmlspecialchars($email)));
+
+        if ($verify->rowCount() > 0) 
+        { //Vérification de l'existence du pseudo
+            echo "Email utilisé";
+        } 
+
+        else 
+        {
+        $add->execute(array(
+            'username' => htmlspecialchars($pseudo),
+            'password' => password_hash($password,PASSWORD_BCRYPT),
+            'email' => htmlspecialchars($email)
+            )); //Envois du pseudo mdp et email à la BDD
+        }
     }
 }
