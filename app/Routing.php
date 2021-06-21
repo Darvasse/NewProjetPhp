@@ -48,6 +48,19 @@ class Routing
             $Controller->gameHandler($name);
         });
 
+        $this->app->get('/connection', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->renderConnection();
+        });
+        $this->app->get('/inscription', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->renderInscription();
+        });
+        $this->app->post('/inscription/validation', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->validationInscription();
+        });
+
 
 
         /*$this->app->get('/city/(\d+)', function ($id) use ($app){

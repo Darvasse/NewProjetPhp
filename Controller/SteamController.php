@@ -41,4 +41,16 @@ class SteamController extends ControllerBase
         $games = $this->app->getService('steamModel')->searchByCategory($category);
         $this->render('magasin', ["games" => $games]);
     }
+    public function renderConnection()
+    {
+        $this->render('connection');
+    }
+    public function renderInscription()
+    {
+        $this->render('inscription');
+    }
+    public function validationInscription()
+    {
+        $user = $this->app->getService('steamModel')->validationInscription($_POST["email"], $_POST["mdp"], $_POST["pseudo"]);
+    }
 }
