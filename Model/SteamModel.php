@@ -22,14 +22,21 @@ class SteamModel
 
     public function getOneGame($name)
     {
-        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID AND j.Name LIKE :name');
+        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description, j.DownloadLink, j.creatorID FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID AND j.Name LIKE :name');
         $query->execute([':name' => $name]);
         return $query->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function getLastGames()
+    {
+        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID ORDER BY j.id DESC LIMIT 5 ');
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function searchByName($name)
     {
-        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID AND j.Name LIKE :search ORDER BY j.Name');
+        $query = $this->conn->prepare('SELECT j.id, j.Name, c.name, j.Description FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID AND j.Name LIKE :search ORDER BY j.Name');
         $query->execute([':search' => '%' . $name . '%']);
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }

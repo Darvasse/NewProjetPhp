@@ -21,9 +21,15 @@
         <td>  </td>
     </tr>
     <tr>
-        <td><a href="">Telecharger</a></td>
+        <td><a href="<?=$params['DownloadLink']; ?>">Telecharger</a></td>
     </tr>
 
+    <?php
+        if ($_SESSION['id'] === $params['creatorID'])
+        {
+            echo "<a href='/delete'><button> Supprimer</button></a>";
+        }
+    ?>
 
 </table>
 </body>

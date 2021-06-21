@@ -14,7 +14,8 @@ class SteamController extends ControllerBase
 
     public function homeHandler()
     {
-        $this->render('MainView');
+        $games = $this->app->getService('steamModel')->getLastGames();
+        $this->render('MainView', ["games" => $games]);
     }
 
     public function gamesHandler()
@@ -41,6 +42,7 @@ class SteamController extends ControllerBase
         $games = $this->app->getService('steamModel')->searchByCategory($category);
         $this->render('magasin', ["games" => $games]);
     }
+
     public function renderConnection()
     {
         $this->render('connection');
@@ -48,5 +50,10 @@ class SteamController extends ControllerBase
     public function renderInscription()
     {
         $this->render('inscription');
+    }
+    public function deleteGame()
+    {
+
+
     }
 }
