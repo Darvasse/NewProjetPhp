@@ -56,10 +56,13 @@ class Routing
             $Controller = new SteamController($app);
             $Controller->renderInscription();
         });
+<<<<<<< HEAD
         $this->app->post('/inscription/validation', function () use ($app){
             $Controller = new SteamController($app);
             $Controller->validationInscription();
         });
+=======
+>>>>>>> main
 
 
 

@@ -49,8 +49,11 @@ class SteamController extends ControllerBase
     {
         $this->render('inscription');
     }
+<<<<<<< HEAD
     public function validationInscription()
     {
         $user = $this->app->getService('steamModel')->validationInscription($_POST["email"], $_POST["mdp"], $_POST["pseudo"]);
     }
+=======
+>>>>>>> main
 }
