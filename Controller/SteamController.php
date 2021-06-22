@@ -42,6 +42,9 @@ class SteamController extends ControllerBase
         $games = $this->app->getService('steamModel')->searchByCategory($category);
         $this->render('magasin', ["games" => $games]);
     }
+    public function renderProfile() {
+        $this->render('profile');
+    }
     public function deleteGame()
     {
 

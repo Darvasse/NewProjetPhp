@@ -63,6 +63,10 @@ class Routing
             $Controller = new SteamController($app);
             $Controller->validationInscription();
         });
+        $this->app->get('/profile', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->renderProfile();
+        });
 
 
 

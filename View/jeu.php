@@ -25,6 +25,7 @@
     </tr>
 
     <?php
+    session_start();
         if ($_SESSION['id'] === $params['creatorID'])
         {
             echo "<a href='/delete'><button> Supprimer</button></a>";

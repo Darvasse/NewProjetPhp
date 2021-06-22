@@ -1,0 +1,17 @@
+#Page{
+	text-align: center;
+	width: 80%;
+}
+.Title{
+	display: flex;
+	justify-content: space-around;
+}
+.buttonContainer{
+	display: flex;
+	justify-content: space-around;
+}
+.buttonHeader{
+	border: none;
+	border-radius: 20px ;
+
+}

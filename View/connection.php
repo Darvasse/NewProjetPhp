@@ -3,21 +3,20 @@
     <head>
         <title>Page de connection</title>
         <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="formCSS.css">
     </head>
 
     <body>     
         <form method="post" action="/connection/validation">
             <h2>Connectez vous</h2>
-            Email : <input type="email" name="email" class="emailInput" required/>
+            Email : <input type="email" name="email" class="Input" required/>
             <br/>
-            Mot de passe : <input type="password" name="mdp" class="passwordInput" required/>
+            Mot de passe : <input type="password" name="mdp" class="Input" required/>
             <br/>
             <br/>
             <input type="submit" value="Valider" class="submit">
             <br/>
             <br/>
         </form>
-
     </body>
-
 </html>
