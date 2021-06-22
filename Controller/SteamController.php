@@ -149,4 +149,7 @@ class SteamController extends ControllerBase
         $this->app->getService('steamModel')->modifyProfile($idUser, $pseudo, $mail);
         $this->renderProfile();
     }
+    public function render404() {
+        $this->render('404');
+    }
 }

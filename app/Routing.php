@@ -100,6 +100,11 @@ class Routing
             $Controller = new SteamController($app);
             $Controller->downloadGame();
         });
+        $app = $this->app;
+        $this->app->get('/404', function () use ($app){
+            $controller = new SteamController($app);
+            $controller->render404();
+        });
 
 
 

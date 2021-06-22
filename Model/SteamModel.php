@@ -128,7 +128,7 @@ DELETE FROM jeu WHERE jeu.Name = :name');
         if ($verify->rowCount() > 0) 
         { //Vérification de l'existence du pseudo
             echo "Email utilisé";
-        } 
+        }
 
         else 
         {
