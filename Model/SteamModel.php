@@ -22,7 +22,7 @@ class SteamModel
 
     public function getOneGame($name)
     {
-        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description, j.DownloadLink, j.creatorID FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID AND j.Name LIKE :name');
+        $query = $this->conn->prepare('SELECT j.id, j.Name, c.name, j.Description, j.DownloadLink, j.creatorID FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID AND j.Name LIKE :name');
         $query->execute([':name' => $name]);
         return $query->fetch(\PDO::FETCH_ASSOC);
     }
@@ -31,6 +31,15 @@ class SteamModel
     {
         $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description, COUNT(uj.idjeu) as nbTelechargement FROM jeu j INNER JOIN categorie c ON c.id = j.CategorieID LEFT JOIN userjeu uj ON uj.idjeu = j.id GROUP BY j.id ORDER BY j.id DESC LIMIT 5 ');
         $query->execute();
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getDownloadedGames($idUser)
+    {
+        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description, COUNT(uj.idjeu) as nbTelechargement FROM jeu j 
+INNER JOIN categorie c ON c.id = j.CategorieID
+INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
+        $query->execute(['idUser' => $idUser]);
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 
@@ -69,9 +78,9 @@ class SteamModel
             $query->execute(['newDesc' => $newDesc, 'id' => $id]);
         }
 
-        if ($newCategory != null)
+        if ($newCategory != 0)
         {
-            $query = $this->conn->prepare('UPDATE jeu SET CategoryID = :newCategory WHERE jeu.id = :id');
+            $query = $this->conn->prepare('UPDATE jeu SET CategoryID = c.id WHERE jeu.id = :id');
             $query->execute(['newCategory' => $newCategory, 'id' => $id]);
         }
 
@@ -131,12 +140,5 @@ DELETE FROM jeu WHERE jeu.Name = :name');
             echo "Identifiants invalides";
         }
     }
-    public function getDownloadedGames($idUser)
-    {
-        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j 
-INNER JOIN categorie c ON c.id = j.CategorieID
-INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
-        $query->execute(['idUser' => $idUser]);
-        return $query->fetchAll(\PDO::FETCH_ASSOC);
-    }
+
 }

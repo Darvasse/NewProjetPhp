@@ -8,21 +8,23 @@
 <body>
 <table>
     <tr>
-        <td><form action="/modify" method="post">
-                <? http_post_data('/modify',$params['id']);?>
+        <td>
+            <form action="/modify" method="post">
                 <p>Mettre à jour les informations de <?=$params['Name']?> :</p>
+                <input type="hidden" name="id" value="<?=$params['id']?>">
                 <input type="text" name="name" placeholder="Nom du jeu">
                 <input type="text" name="desc" placeholder="Description">
-                <SELECT name="category">
-                    <option value="null" SELECTED>Categorie</option>
-                    <OPTION value="2">Action</OPTION>
+                <select name="category">
+                    <option value="0" SELECTED>Categorie</option>
+                    <option value="2">Action</option>
                     <option value="3">Aventure</option>
                     <option value="4">Course</option>
                     <option value="1">Survie</option>
-                </SELECT>
+                </select>
                 <input type="text" name="link" placeholder="Lien de téléchargement">
                 <input type="submit" value="Mettre a jour">
-            </form></td>
+            </form>
+        </td>
 
 </table>
 </body>

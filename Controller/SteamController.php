@@ -4,6 +4,7 @@ namespace Controller;
 
 use Controller\ControllerBase;
 use App\Src\App;
+use function mysql_xdevapi\getSession;
 
 class SteamController extends ControllerBase
 {
@@ -45,6 +46,7 @@ class SteamController extends ControllerBase
 
     public function renderProfile()
     {
+        session_start();
         $games = $this->app->getService('steamModel')->getDownloadedGames($_SESSION['id']);
         $this->render('profile', ['games' => $games]);
     }
@@ -76,7 +78,7 @@ class SteamController extends ControllerBase
         $newLink = $_POST['link'];
 
         $this->app->getService('steamModel')->modifyGame($id, $newName, $newDesc, $newCategory, $newLink);
-        $this->homeHandler();
+        $this->renderProfile();
     }
 
     private function renderDelete($name)
@@ -87,7 +89,7 @@ class SteamController extends ControllerBase
 
     public function deleteGame($name)
     {
-        $this->app->getService('steamModel')->deleteGame($name, $_SERVER['id']);
+        $this->app->getService('steamModel')->deleteGame($name, $_SESSION['id']);
         $this->homeHandler();
     }
     public function renderConnection()

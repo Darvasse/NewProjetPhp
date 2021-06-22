@@ -14,7 +14,7 @@
 		echo "<b>E-mail: </b>" . $_SESSION["email"];
 	}
 	?>
-	<table>
+    <table>
         <?php foreach ($params['games'] as $game) : ?>
             <tr>
                 <td width="100" align="center"><a href="/jeu/<?= $game['Name']; ?>"><?=$game['Name'];?></a></td>
