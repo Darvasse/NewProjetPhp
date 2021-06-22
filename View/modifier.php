@@ -14,12 +14,12 @@
                 <input type="hidden" name="id" value="<?=$params['id']?>">
                 <input type="text" name="name" placeholder="Nom du jeu">
                 <input type="text" name="desc" placeholder="Description">
-                <select name="category">
-                    <option value="0" SELECTED>Categorie</option>
-                    <option value="2">Action</option>
-                    <option value="3">Aventure</option>
-                    <option value="4">Course</option>
-                    <option value="1">Survie</option>
+                <select type="number" name="category">
+                    <option value="null" SELECTED>Categorie</option>
+                    <option value="Action">Action</option>
+                    <option value="Aventure">Aventure</option>
+                    <option value="Course">Course</option>
+                    <option value="Survie">Survie</option>
                 </select>
                 <input type="text" name="link" placeholder="Lien de téléchargement">
                 <input type="submit" value="Mettre a jour">

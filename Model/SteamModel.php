@@ -64,7 +64,7 @@ INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
         return;
     }
 
-    public function modifyGame($id, $newName, $newDesc, $newCategory, $newLink)
+    public function modifyGame($id, $newName, $newDesc,int $newCategory, $newLink)
     {
         if ($newName != null)
         {
@@ -80,7 +80,7 @@ INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
 
         if ($newCategory != 0)
         {
-            $query = $this->conn->prepare('UPDATE jeu SET CategoryID = c.id WHERE jeu.id = :id');
+            $query = $this->conn->prepare('UPDATE jeu SET CategoryID = :newCategory WHERE jeu.id = :id');
             $query->execute(['newCategory' => $newCategory, 'id' => $id]);
         }
 
