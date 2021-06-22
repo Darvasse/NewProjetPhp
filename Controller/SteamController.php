@@ -117,6 +117,6 @@ class SteamController extends ControllerBase
         $this->redirectToDlLink($_POST['dllink']);
     }
     public function redirectToDlLink($link) {
-        header("Location : $link");
+        header('Location:'.$link);
     }
 }
