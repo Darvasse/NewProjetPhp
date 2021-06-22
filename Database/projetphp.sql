@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Hôte : 127.0.0.1
--- Généré le : sam. 19 juin 2021 à 14:17
--- Version du serveur :  10.4.18-MariaDB
--- Version de PHP : 7.3.28
+-- Client :  127.0.0.1
+-- Généré le :  Mar 22 Juin 2021 à 14:47
+-- Version du serveur :  10.1.10-MariaDB
+-- Version de PHP :  7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -18,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `projetphp`
+-- Base de données :  `projetphp`
 --
 
 -- --------------------------------------------------------
@@ -34,11 +33,11 @@ CREATE TABLE `categorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `categorie`
+-- Contenu de la table `categorie`
 --
 
 INSERT INTO `categorie` (`id`, `description`, `name`) VALUES
-(1, 'Meurs pas c\'est ton seul objectif', 'Survie'),
+(1, 'Meurs pas c''est ton seul objectif', 'Survie'),
 (2, 'TAPER', 'Action'),
 (3, 'Partir loin des fous et vivre une aventure extraordinaire', 'Aventure'),
 (4, 'Jeux de course de voiture, moto, cadis, enfin bref tout ce qui peut faire office de véhicule qui vas vite (ou pas)', 'Course');
@@ -65,15 +64,17 @@ CREATE TABLE `jeu` (
   `id` int(11) NOT NULL,
   `Name` varchar(255) NOT NULL,
   `Description` varchar(255) NOT NULL,
-  `CategorieID` int(11) NOT NULL
+  `CategorieID` int(11) NOT NULL,
+  `DownloadLink` varchar(255) NOT NULL,
+  `creatorID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `jeu`
+-- Contenu de la table `jeu`
 --
 
-INSERT INTO `jeu` (`id`, `Name`, `Description`, `CategorieID`) VALUES
-(1, 'Minecraft', 'Rien à dire ça claque', 1);
+INSERT INTO `jeu` (`id`, `Name`, `Description`, `CategorieID`, `DownloadLink`, `creatorID`) VALUES
+(1, 'Minecraft', 'Rien à dire ça claque', 1, 'https://www.minecraft.net/fr-fr/get-minecraft', 0);
 
 -- --------------------------------------------------------
 
@@ -88,11 +89,17 @@ CREATE TABLE `userjeu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `userjeu`
+-- Contenu de la table `userjeu`
 --
 
 INSERT INTO `userjeu` (`id`, `iduser`, `idjeu`) VALUES
-(1, 8, 1);
+(1, 8, 1),
+(3, 8, 1),
+(4, 8, 1),
+(5, 8, 1),
+(6, 8, 1),
+(7, 8, 1),
+(8, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -108,7 +115,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `users`
+-- Contenu de la table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
@@ -117,7 +124,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
 (10, 'meme', 'meme@outlook.com', '$2y$10$eKtL7a2/gJeCZfe3I32o9ucbdbYo3gyYle/cp2A4SQJPPzWPOwtaO');
 
 --
--- Index pour les tables déchargées
+-- Index pour les tables exportées
 --
 
 --
@@ -151,7 +158,7 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
@@ -159,32 +166,26 @@ ALTER TABLE `users`
 --
 ALTER TABLE `categorie`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT pour la table `categoriejeu`
 --
 ALTER TABLE `categoriejeu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT pour la table `jeu`
 --
 ALTER TABLE `jeu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT pour la table `userjeu`
 --
 ALTER TABLE `userjeu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
