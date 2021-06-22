@@ -15,12 +15,14 @@ class SteamController extends ControllerBase
 
     public function homeHandler()
     {
+        session_start();
         $games = $this->app->getService('steamModel')->getLastGames();
         $this->render('MainView', ["games" => $games]);
     }
 
     public function gamesHandler()
     {
+        session_start();
         $games = $this->app->getService('steamModel')->getAllGames();
         $this->render('magasin', ["games" => $games]);
     }

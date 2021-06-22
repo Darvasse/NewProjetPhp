@@ -12,9 +12,12 @@
 
 <table>
     <tr>
-        <td>
-            <a href="/poster-jeu"><button>Poster un jeu</button></a>
-        </td>
+        <?php
+        if (isset($_SESSION["pseudo"]) && isset($_SESSION["password"]))
+        {
+            echo "<td><a href = '/poster-jeu' ><button > Poster un jeu </button ></a ></td >";
+        }
+        ?>
     </tr>
     <tr>
         <td><form action="/magasin" method="post">
