@@ -23,7 +23,7 @@
             <tr>
                 <td class="disp" width="100" align="center"><a href="/jeu/<?= $game['Name']; ?>"><?=$game['Name'];?></a></td>
                 <td class="disp" width="100" align="center"><?= $game['name']; ?></td>
-                <td width='150' align='center'>Téléchargé <?=$game['nbTelechargement']; ?> fois</td>;
+                <td width='150' align='center'>Téléchargé <?=$game['nbTelechargement']; ?> fois</td>
                 <td align="center"><?= $game['Description']; ?></td>
             </tr>
         <?php endforeach; ?>

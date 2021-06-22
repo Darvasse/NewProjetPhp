@@ -38,7 +38,7 @@ class SteamModel
     {
         $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description, COUNT(uj.idjeu) as nbTelechargement FROM jeu j 
 INNER JOIN categorie c ON c.id = j.CategorieID
-INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
+LEFT JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu GROUP BY j.Name');
         $query->execute(['idUser' => $idUser]);
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -59,9 +59,9 @@ INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
 
     public function downloadGame($idUser, $idJeu)
     {
-        $verif = $this->conn->prepare('SELECT iduser FROM userjeu WHERE iduser = :id');
+        $verif = $this->conn->prepare('SELECT iduser FROM userjeu WHERE iduser = :id AND idjeu = :idjeu');
         $query = $this->conn->prepare('INSERT INTO userjeu (iduser, idjeu) VALUES (:idUser, :idJeu)');
-        $verif->execute(['id' => $idUser]);
+        $verif->execute(['id' => $idUser, 'idjeu' => $idJeu]);
         if ($verif->rowCount() >= 1) {
             return;
         }
@@ -76,25 +76,25 @@ INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
         if ($newName != null)
         {
             $query = $this->conn->prepare('UPDATE jeu SET Name = :newName WHERE jeu.id = :id');
-            $query->execute(['newName' => $newName, 'id' => $id]);
+            $query->execute(['newName' => htmlspecialchars($newName), 'id' => $id]);
         }
 
         if ($newDesc != null)
         {
             $query = $this->conn->prepare('UPDATE jeu SET Description = :newDesc WHERE jeu.id = :id');
-            $query->execute(['newDesc' => $newDesc, 'id' => $id]);
+            $query->execute(['newDesc' => htmlspecialchars($newDesc), 'id' => $id]);
         }
 
         if ($newCategory != 0)
         {
             $query = $this->conn->prepare('UPDATE jeu SET CategorieID = :newCategory WHERE jeu.id = :id');
-            $query->execute(['newCategory' => $newCategory, 'id' => $id]);
+            $query->execute(['newCategory' => htmlspecialchars($newCategory), 'id' => $id]);
         }
 
         if ($newLink != null)
         {
             $query = $this->conn->prepare('UPDATE jeu SET DownloadLink = :newLink WHERE jeu.id = :id');
-            $query->execute(['newLink' => $newLink, 'id' => $id]);
+            $query->execute(['newLink' => htmlspecialchars($newLink), 'id' => $id]);
         }
         return;
     }
@@ -103,7 +103,7 @@ INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
     {
         $query = $this->conn->prepare('DELETE FROM userjeu WHERE id = :userID;
 DELETE FROM jeu WHERE jeu.Name = :name');
-        return $query->execute(['name' => $name, 'userID' => $userID]);
+        return $query->execute(['name' => htmlspecialchars($name), 'userID' => $userID]);
 
     }
 
@@ -111,11 +111,11 @@ DELETE FROM jeu WHERE jeu.Name = :name');
     {
         $query = $this->conn->prepare('INSERT INTO jeu (Name, Description, CategorieID, DownloadLink, creatorID) VALUES (:name, :desc, :category, :link, :creatorID);');
         return $query->execute([
-            ':name' => $name,
-            ':desc' => $desc,
-            ':category' => $category,
-            ':link' => $link,
-            'creatorID' => $creatorID
+            ':name' => htmlspecialchars($name),
+            ':desc' => htmlspecialchars($desc),
+            ':category' => htmlspecialchars($category),
+            ':link' => htmlspecialchars($link),
+            'creatorID' => htmlspecialchars($creatorID)
         ]);
     }
 
@@ -164,20 +164,20 @@ DELETE FROM jeu WHERE jeu.Name = :name');
     {
         if($pseudo != null)
         {
-            $_SESSION['pseudo'] = $pseudo;
+            $_SESSION['pseudo'] = htmlspecialchars($pseudo);
             $query = $this->conn->prepare('UPDATE users SET username = :pseudo WHERE users.id = :id; ');
             $query->execute([
-                'pseudo' => $pseudo,
-                'id' => $id
+                'pseudo' => htmlspecialchars($pseudo),
+                'id' => htmlspecialchars($id)
             ]);
         }
         if($mail != null)
         {
-            $_SESSION['email'] = $mail;
+            $_SESSION['email'] = htmlspecialchars($mail);
             $query = $this->conn->prepare('UPDATE users SET email = :mail WHERE users.id = :id;');
             $query->execute([
-                'mail' => $mail,
-                'id' => $id
+                'mail' => htmlspecialchars($mail),
+                'id' => htmlspecialchars($id)
             ]);
         }
         return;
