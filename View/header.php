@@ -4,7 +4,7 @@
 		<?php 
 		if (isset($_SESSION["pseudo"]) && isset($_SESSION["password"])) {
 			echo "Bienvenue " . $_SESSION["pseudo"];
-			echo "<button class=\"buttonHeader\" onclick=\"window.location.href = '/profile'\">Profile</button>";
+			echo "<button class=\"buttonHeader\" id=\"ProfButtib\" onclick=\"window.location.href = '/profile'\">Profile</button>";
 		}
 		else {
 			?>

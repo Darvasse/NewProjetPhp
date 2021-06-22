@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./profileCss.css">
 	<title>Profile</title>
 </head>
 <body>
@@ -16,8 +17,8 @@
     <table>
         <?php foreach ($params['games'] as $game) : ?>
             <tr>
-                <td width="100" align="center"><a href="/jeu/<?= $game['Name']; ?>"><?=$game['Name'];?></a></td>
-                <td width="100" align="center"><?= $game['name']; ?></td>
+                <td class="disp" width="100" align="center"><a href="/jeu/<?= $game['Name']; ?>"><?=$game['Name'];?></a></td>
+                <td class="disp" width="100" align="center"><?= $game['name']; ?></td>
                 <td width='150' align='center'>Téléchargé <?=$game['nbTelechargement']; ?> fois</td>;
                 <td align="center"><?= $game['Description']; ?></td>
             </tr>

@@ -2,6 +2,9 @@
 	text-align: center;
 	width: 80%;
 }
+#ProfButtib{
+	margin-left: 2em;
+}
 .Title{
 	display: flex;
 	justify-content: space-around;
