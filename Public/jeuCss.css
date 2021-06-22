@@ -1,0 +1,10 @@
+body{
+    background-color: #2a475e;
+    font-family: roboto;
+    color: #ffffff;
+    text-align: center;
+}
+table {
+	display: flex;
+	justify-content: center;
+}
