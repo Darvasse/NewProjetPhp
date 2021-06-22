@@ -4,10 +4,11 @@
 <head>
     <meta http-equiv="content-type" content="text/html" charset="utf-8" />
     <title>Nouveau Steam</title>
-    <link rel="stylesheet" type="text/css" href="./MainPage.css">
+    <link rel="stylesheet" type="text/css" href="../MainPage.css">
 </head>
-<?php include "header.php"?>
+
 <body>
+<?php include "header.php"?>
 <h1>Nouveau Steam</h1>
 
 <a href="/magasin">Magasin</a>

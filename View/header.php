@@ -1,5 +1,5 @@
 <p id="Page">
-	<link rel="stylesheet" type="text/css" href="./HeaderCSS.css">
+	<link rel="stylesheet" type="text/css" href="../HeaderCSS.css">
 		<h1 class="Title">Bienvenue sur le nouveau steam !</h1>
 		<?php 
 		if (isset($_SESSION["pseudo"]) && isset($_SESSION["password"])) {
