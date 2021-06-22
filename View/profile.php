@@ -7,7 +7,6 @@
 <body>
 	<h1>Profile</h1>
 	<?php
-	//session_start();
 	if (isset($_SESSION["pseudo"]) && isset($_SESSION["password"])) {
 		echo "<b>Pseudo: </b>" . $_SESSION["pseudo"];
 		echo "<br/>";
