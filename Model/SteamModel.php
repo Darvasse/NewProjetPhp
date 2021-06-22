@@ -52,7 +52,7 @@ INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
 
     public function searchByCategory($category)
     {
-        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j, COUNT(uj.idjeu) as nbTelechargement INNER JOIN categorie c ON c.id = j.CategorieID LEFT JOIN userjeu uj ON uj.idjeu = j.id WHERE c.name LIKE :search GROUP BY j.Name ORDER BY j.Name');
+        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description, COUNT(uj.idjeu) as nbTelechargement FROM jeu j INNER JOIN categorie c ON c.id = j.CategorieID LEFT JOIN userjeu uj ON uj.idjeu = j.id WHERE c.name LIKE :search GROUP BY j.Name ORDER BY j.Name');
         $query->execute([':search' => $category]);
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
