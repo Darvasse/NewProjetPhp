@@ -59,8 +59,15 @@ INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
 
     public function downloadGame($idUser, $idJeu)
     {
+        $verif = $this->conn->prepare('SELECT iduser FROM userjeu WHERE iduser = :id');
         $query = $this->conn->prepare('INSERT INTO userjeu (iduser, idjeu) VALUES (:idUser, :idJeu)');
-        $query->execute(['idUser' => $idUser, 'idJeu' => $idJeu]);
+        $verif->execute(['id' => $idUser]);
+        if ($verif->rowCount() >= 1) {
+            return;
+        }
+        else {
+           $query->execute(['idUser' => $idUser, 'idJeu' => $idJeu]); 
+        }
         return;
     }
 
