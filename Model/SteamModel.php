@@ -140,4 +140,12 @@ DELETE FROM jeu WHERE jeu.Name = :name');
             echo "Identifiants invalides";
         }
     }
+    public function getDownloadedGames($idUser)
+    {
+        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j 
+INNER JOIN categorie c ON c.id = j.CategorieID
+INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
+        $query->execute(['idUser' => $idUser]);
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

@@ -21,13 +21,15 @@
         <td>  </td>
     </tr>
     <tr>
-        <td><a href="<?=$params['DownloadLink']; ?>">
-                <button>Telecharger</button>
+        <td><!--<a href="<?=$params['DownloadLink']; ?>">-->
+            <a href="/downloadGame">
+                    <button>Telecharger</button>
             </a></td>
     </tr>
 
     <td>
     <?php
+    session_start();
         if ($_SESSION['id'] === $params['creatorID'])
         {
             echo "<tr><td><a href='/jeu/$params[Name]/modifier'><button>Modifier</button></a></td></tr>";
