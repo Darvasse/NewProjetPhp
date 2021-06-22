@@ -16,16 +16,16 @@
                 <input type="text" name="name">
                 <input type="submit">
             </form></td>
-        <td>
+        <td width="100" align="center">
             <a href="/magasin/Action">Action</a>
         </td>
-        <td>
+        <td width="100" align="center">
             <a href="/magasin/Aventure">Aventure</a>
         </td>
-        <td>
+        <td width="100" align="center">
             <a href="/magasin/Course">Course</a>
         </td>
-        <td>
+        <td width="100" align="center">
             <a href="/magasin/Survie">Survie</a>
         </td>
     </tr>
@@ -33,9 +33,10 @@
 <table>
     <?php foreach ($params['games'] as $game) : ?>
         <tr>
-            <td><a href="/jeu/<?= $game['Name']; ?>"><?=$game['Name'];?></a></td>
-            <td><?= $game['name']; ?></td>
-            <td><?= $game['Description']; ?></td>
+            <td width="100" align="center"><a href="/jeu/<?= $game['Name']; ?>"><?=$game['Name'];?></a></td>
+            <td width="100" align="center"><?= $game['name']; ?></td>
+            <td width="150" align="center">Téléchargé <?= $game['nbTelechargement']; ?> fois</td>
+            <td align="center"><?= $game['Description']; ?></td>
         </tr>
     <?php endforeach; ?>
 

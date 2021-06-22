@@ -1,4 +1,4 @@
-<!-- Magasin -->
+<!-- Jeu -->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -21,16 +21,20 @@
         <td>  </td>
     </tr>
     <tr>
-        <td><a href="<?=$params['DownloadLink']; ?>">Telecharger</a></td>
+        <td><a href="<?=$params['DownloadLink']; ?>">
+                <button>Telecharger</button>
+            </a></td>
     </tr>
 
+    <td>
     <?php
-    session_start();
         if ($_SESSION['id'] === $params['creatorID'])
         {
-            echo "<a href='/delete'><button> Supprimer</button></a>";
+            echo "<tr><td><a href='/jeu/$params[Name]/modifier' action='index.php'><button>Modifier</button></a></td></tr>";
+            echo "<tr><td><a href='/jeu/$params[Name]/supprimer'><button> Supprimer</button></a></td></tr>";
         }
     ?>
+    </td>
 
 </table>
 </body>

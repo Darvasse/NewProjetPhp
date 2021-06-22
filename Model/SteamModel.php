@@ -15,7 +15,7 @@ class SteamModel
 
     public function getAllGames()
     {
-        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID ORDER BY j.Name');
+        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description, COUNT(uj.idjeu) as nbTelechargement FROM jeu j INNER JOIN categorie c ON c.id = j.CategorieID INNER JOIN userjeu uj ON uj.idjeu = j.id GROUP BY j.Name ORDER BY j.Name');
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -29,24 +29,68 @@ class SteamModel
 
     public function getLastGames()
     {
-        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID ORDER BY j.id DESC LIMIT 5 ');
+        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description, COUNT(uj.idjeu) as nbTelechargement FROM jeu j INNER JOIN categorie c ON c.id = j.CategorieID LEFT JOIN userjeu uj ON uj.idjeu = j.id GROUP BY j.id ORDER BY j.id DESC LIMIT 5 ');
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function searchByName($name)
     {
-        $query = $this->conn->prepare('SELECT j.id, j.Name, c.name, j.Description FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID AND j.Name LIKE :search ORDER BY j.Name');
+        $query = $this->conn->prepare('SELECT j.id, j.Name, c.name, j.Description, COUNT(uj.idjeu) as nbTelechargement FROM jeu j INNER JOIN categorie c ON c.id = j.CategorieID LEFT JOIN userjeu uj ON uj.idjeu = j.id WHERE j.Name LIKE :search GROUP BY j.Name ORDER BY j.Name');
         $query->execute([':search' => '%' . $name . '%']);
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function searchByCategory($category)
     {
-        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j INNER JOIN categorie c WHERE c.id = j.CategorieID AND c.name LIKE :search ORDER BY j.Name');
+        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j, COUNT(uj.idjeu) as nbTelechargement INNER JOIN categorie c ON c.id = j.CategorieID LEFT JOIN userjeu uj ON uj.idjeu = j.id WHERE c.name LIKE :search GROUP BY j.Name ORDER BY j.Name');
         $query->execute([':search' => $category]);
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function downloadGame($idUser, $idJeu)
+    {
+        $query = $this->conn->prepare('INSERT INTO userjeu (iduser, idjeu) VALUES (:idUser, :idJeu)');
+        $query->execute(['idUser' => $idUser, 'idJeu' => $idJeu]);
+        return;
+    }
+
+    public function modifyGame($id, $newName, $newDesc, $newCategory, $newLink)
+    {
+        if ($newName != null)
+        {
+            $query = $this->conn->prepare('UPDATE jeu SET Name = :newName WHERE jeu.id = :id');
+            $query->execute(['newName' => $newName, 'id' => $id]);
+        }
+
+        if ($newDesc != null)
+        {
+            $query = $this->conn->prepare('UPDATE jeu SET Description = :newDesc WHERE jeu.id = :id');
+            $query->execute(['newDesc' => $newDesc, 'id' => $id]);
+        }
+
+        if ($newCategory != null)
+        {
+            $query = $this->conn->prepare('UPDATE jeu SET CategoryID = :newCategory WHERE jeu.id = :id');
+            $query->execute(['newCategory' => $newCategory, 'id' => $id]);
+        }
+
+        if ($newLink != null)
+        {
+            $query = $this->conn->prepare('UPDATE jeu SET DownloadLink = :newLink WHERE jeu.id = :id');
+            $query->execute(['newLink' => $newLink, 'id' => $id]);
+        }
+        return;
+    }
+
+    public function deleteGame($name, $userID)
+    {
+        $query = $this->conn->prepare('DELETE FROM userjeu WHERE id = :userID;
+DELETE FROM jeu WHERE jeu.Name = :name');
+        $query->execute(['name' => $name, 'userID' => $userID]);
+        return;
+    }
+
     public function validationInscription($email, $password, $pseudo)
     {
         $verify = $this->conn->prepare('SELECT email FROM users WHERE email = :email');

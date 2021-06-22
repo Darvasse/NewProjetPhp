@@ -1,4 +1,4 @@
-<!-- Magasin -->
+<!-- MainView -->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -17,9 +17,10 @@
 
     <?php foreach ($params['games'] as $game) : ?>
         <tr>
-            <td><a href="/jeu/<?= $game['Name']; ?>"><?=$game['Name'];?></a></td>
-            <td><?= $game['name']; ?></td>
-            <td><?= $game['Description']; ?></td>
+            <td width="100" align="center"><a href="/jeu/<?= $game['Name']; ?>"><?=$game['Name'];?></a></td>
+            <td width="100" align="center"><?= $game['name']; ?></td>
+            <td width="150" align="center">Téléchargé <?= $game['nbTelechargement']; ?> fois</td>
+            <td align="center"><?= $game['Description']; ?></td>
         </tr>
     <?php endforeach; ?>
 

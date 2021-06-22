@@ -3,7 +3,6 @@
 namespace App;
 
 use Controller\SteamController;
-use Controller\CountryController;
 use App\Src\App;
 
 class Routing
@@ -47,6 +46,22 @@ class Routing
             $Controller = new SteamController($app);
             $Controller->gameHandler($name);
         });
+
+        $this->app->get('/jeu/(\w+)/(\w+)', function ($name, $action) use ($app){
+            $Controller = new SteamController($app);
+            $Controller->actionOnGame($name, $action);
+        });
+
+        $this->app->get('/delete/(\w+)', function ($name) use ($app){
+            $Controller = new SteamController($app);
+            $Controller->deleteGame($name);
+        });
+
+        $this->app->post('/modify', function () use ($app){
+           $Controller = new SteamController($app);
+           $Controller->modifyGame();
+        });
+
         $this->app->get('/connection', function () use ($app){
             $Controller = new SteamController($app);
             $Controller->renderConnection();
