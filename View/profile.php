@@ -18,15 +18,11 @@
         </tr>
     </table>
     <table>
+        <tr><td>Vos jeux</td></tr>
         <?php foreach ($params['games'] as $game) : ?>
             <tr>
                 <td class="disp" width="100" align="center"><a href="/jeu/<?= $game['Name']; ?>"><?=$game['Name'];?></a></td>
                 <td class="disp" width="100" align="center"><?= $game['name']; ?></td>
-                <p>Vos jeux</p>
-            </tr>
-            <tr>
-                <td width="100" align="center"><a href="/jeu/<?= $game['Name']; ?>"><?=$game['Name'];?></a></td>
-                <td width="100" align="center"><?= $game['name']; ?></td>
                 <td width='150' align='center'>Téléchargé <?=$game['nbTelechargement']; ?> fois</td>;
                 <td align="center"><?= $game['Description']; ?></td>
             </tr>

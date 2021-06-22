@@ -164,6 +164,7 @@ DELETE FROM jeu WHERE jeu.Name = :name');
     {
         if($pseudo != null)
         {
+            $_SESSION['pseudo'] = $pseudo;
             $query = $this->conn->prepare('UPDATE users SET username = :pseudo WHERE users.id = :id; ');
             $query->execute([
                 'pseudo' => $pseudo,
@@ -172,6 +173,7 @@ DELETE FROM jeu WHERE jeu.Name = :name');
         }
         if($mail != null)
         {
+            $_SESSION['email'] = $mail;
             $query = $this->conn->prepare('UPDATE users SET email = :mail WHERE users.id = :id;');
             $query->execute([
                 'mail' => $mail,
