@@ -134,7 +134,7 @@ DELETE FROM jeu WHERE jeu.Name = :name');
     }
     public function validationConnection($email, $password) {
         session_start();
-        //session_unset();
+        session_unset();
         $reqValidation = $this->conn->prepare('SELECT id,username,password,email FROM users WHERE email = ?'); //recuperation du champ correspondant au pseudo
         $reqValidation->execute(array(
             htmlspecialchars($email)
