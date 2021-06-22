@@ -34,6 +34,15 @@ class SteamModel
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getDownloadedGames($idUser)
+    {
+        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description FROM jeu j 
+INNER JOIN categorie c ON c.id = j.CategorieID
+INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
+        $query->execute(['idUser' => $idUser]);
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function searchByName($name)
     {
         $query = $this->conn->prepare('SELECT j.id, j.Name, c.name, j.Description, COUNT(uj.idjeu) as nbTelechargement FROM jeu j INNER JOIN categorie c ON c.id = j.CategorieID LEFT JOIN userjeu uj ON uj.idjeu = j.id WHERE j.Name LIKE :search GROUP BY j.Name ORDER BY j.Name');

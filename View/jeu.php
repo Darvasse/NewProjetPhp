@@ -30,7 +30,7 @@
     <?php
         if ($_SESSION['id'] === $params['creatorID'])
         {
-            echo "<tr><td><a href='/jeu/$params[Name]/modifier' action='index.php'><button>Modifier</button></a></td></tr>";
+            echo "<tr><td><a href='/jeu/$params[Name]/modifier'><button>Modifier</button></a></td></tr>";
             echo "<tr><td><a href='/jeu/$params[Name]/supprimer'><button> Supprimer</button></a></td></tr>";
         }
     ?>

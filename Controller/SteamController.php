@@ -43,8 +43,10 @@ class SteamController extends ControllerBase
         $this->render('magasin', ["games" => $games]);
     }
 
-    public function renderProfile() {
-        $this->render('profile');
+    public function renderProfile()
+    {
+        $games = $this->app->getService('steamModel')->getDownloadedGames($_SESSION['id']);
+        $this->render('profile', ['games' => $games]);
     }
 
     public function actionOnGame($name, $action)
