@@ -16,10 +16,6 @@ abstract class ControllerBase
 
     protected function render(String $template, Array $params = [])
     {
-        if ($template === '404')
-        {
-            header("Location: 404");
-        }
 
         ob_start();
         include __DIR__ . '/../View/' . $template . '.php';

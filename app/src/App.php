@@ -128,7 +128,7 @@ class App
             }
         }
 
-        throw new \Error('No routes available for this uri');
+        header("Location: /404");
     }
 
     /**
