@@ -6,11 +6,18 @@ body{
 }
 table {
 	display: flex; 
+    flex-wrap: wrap;
 	justify-content: center;
 }
-
+tr{display:flex; flex-direction: column;justify-content: center;}
 td{
+    margin: 0;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
 }
+tbody{
+    display: flex;
+    flex-direction: column;
+}
+a{justify-content: center;}
