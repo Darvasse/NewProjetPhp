@@ -113,8 +113,8 @@ class SteamController extends ControllerBase
     public function downloadGame()
     {
         session_start();
-        $user = $this->app->getService('steamModel')->downloadGame(htmlspecialchars($_SESSION['id']), htmlspecialchars($params['creatorID']));
-        $this->redirectToDlLink($params['DownloadLink']);
+        $user = $this->app->getService('steamModel')->downloadGame(htmlspecialchars($_SESSION['id']), $_POST['idjeu']);
+        $this->redirectToDlLink($_POST['dllink']);
     }
     public function redirectToDlLink($link) {
         header("Location : $link");

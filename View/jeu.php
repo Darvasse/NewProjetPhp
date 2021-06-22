@@ -22,13 +22,21 @@
     </tr>
     <tr>
         <td><!--<a href="<?=$params['DownloadLink']; ?>">-->
-            <a href="/downloadGame">
+            <form method="POST" action="/downloadGame">
+                <input type="text" name="dllink" value="<?=$params['DownloadLink'];?>" hidden/>
+                <input type="text" name="idjeu" value="<?=$params['id'];?>" hidden/>
+                <input type="submit" value="Telecharger" />
+            </form>
+            <!--<a href="/<?=$params['DownloadLink'];?>">
                     <button>Telecharger</button>
-            </a></td>
+            </a>--></td>
     </tr>
 
     <td>
     <?php
+    echo "<pre>";
+    var_dump($params);
+    echo "</pre>";
     session_start();
         if ($_SESSION['id'] === $params['creatorID'])
         {

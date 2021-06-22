@@ -82,7 +82,7 @@ class Routing
             $Controller = new SteamController($app);
             $Controller->renderProfile();
         });
-        $this->app->get('/downloadGame', function () use ($app){
+        $this->app->post('/downloadGame', function () use ($app){
             $Controller = new SteamController($app);
             $Controller->downloadGame();
         });
