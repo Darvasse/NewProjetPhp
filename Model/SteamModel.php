@@ -160,4 +160,25 @@ DELETE FROM jeu WHERE jeu.Name = :name');
         }
     }
 
+    public function modifyProfile($id, $pseudo, $mail)
+    {
+        if($pseudo != null)
+        {
+            $query = $this->conn->prepare('UPDATE users SET username = :pseudo WHERE users.id = :id; ');
+            $query->execute([
+                'pseudo' => $pseudo,
+                'id' => $id
+            ]);
+        }
+        if($mail != null)
+        {
+            $query = $this->conn->prepare('UPDATE users SET email = :mail WHERE users.id = :id;');
+            $query->execute([
+                'mail' => $mail,
+                'id' => $id
+            ]);
+        }
+        return;
+    }
+
 }

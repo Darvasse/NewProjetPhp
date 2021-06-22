@@ -139,4 +139,14 @@ class SteamController extends ControllerBase
     public function redirectToDlLink($link) {
         header('Location:'.$link);
     }
+
+    public function modifyProfile()
+    {
+        session_start();
+        $idUser = $_SESSION['id'];
+        $pseudo = $_POST['pseudo'];
+        $mail = $_POST['mail'];
+        $this->app->getService('steamModel')->modifyProfile($idUser, $pseudo, $mail);
+        $this->renderProfile();
+    }
 }
