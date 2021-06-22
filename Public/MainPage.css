@@ -1,0 +1,9 @@
+body{
+	background-color:#2a475e ;
+	font-family: Roboto;
+	text-align: center;
+}
+table {
+	display: flex;
+	justify-content: center;
+}

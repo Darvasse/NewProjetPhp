@@ -3,7 +3,6 @@
 namespace App;
 
 use Controller\SteamController;
-use Controller\CountryController;
 use App\Src\App;
 
 class Routing
@@ -48,9 +47,28 @@ class Routing
             $Controller->gameHandler($name);
         });
 
+        $this->app->get('/jeu/(\w+)/(\w+)', function ($name, $action) use ($app){
+            $Controller = new SteamController($app);
+            $Controller->actionOnGame($name, $action);
+        });
+
+        $this->app->get('/delete/(\w+)', function ($name) use ($app){
+            $Controller = new SteamController($app);
+            $Controller->deleteGame($name);
+        });
+
+        $this->app->post('/modify', function () use ($app){
+           $Controller = new SteamController($app);
+           $Controller->modifyGame();
+        });
+
         $this->app->get('/connection', function () use ($app){
             $Controller = new SteamController($app);
             $Controller->renderConnection();
+        });
+        $this->app->post('/connection/validation', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->validationConnection();
         });
         $this->app->get('/inscription', function () use ($app){
             $Controller = new SteamController($app);
@@ -59,6 +77,14 @@ class Routing
         $this->app->post('/inscription/validation', function () use ($app){
             $Controller = new SteamController($app);
             $Controller->validationInscription();
+        });
+        $this->app->get('/profile', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->renderProfile();
+        });
+        $this->app->get('/downloadGame', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->downloadGame();
         });
 
 
