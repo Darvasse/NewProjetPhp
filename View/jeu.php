@@ -34,9 +34,7 @@
 
     <td>
     <?php
-    echo "<pre>";
-    var_dump($params);
-    echo "</pre>";
+
     session_start();
         if ($_SESSION['id'] === $params['creatorID'])
         {

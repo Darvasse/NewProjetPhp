@@ -15,7 +15,7 @@ class SteamModel
 
     public function getAllGames()
     {
-        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description, COUNT(uj.idjeu) as nbTelechargement FROM jeu j INNER JOIN categorie c ON c.id = j.CategorieID INNER JOIN userjeu uj ON uj.idjeu = j.id GROUP BY j.Name ORDER BY j.Name');
+        $query = $this->conn->prepare('SELECT j.Name, c.name, j.Description, COUNT(uj.idjeu) as nbTelechargement FROM jeu j INNER JOIN categorie c ON c.id = j.CategorieID LEFT JOIN userjeu uj ON uj.idjeu = j.id GROUP BY j.Name ORDER BY j.Name');
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -80,7 +80,7 @@ INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
 
         if ($newCategory != 0)
         {
-            $query = $this->conn->prepare('UPDATE jeu SET CategoryID = :newCategory WHERE jeu.id = :id');
+            $query = $this->conn->prepare('UPDATE jeu SET CategorieID = :newCategory WHERE jeu.id = :id');
             $query->execute(['newCategory' => $newCategory, 'id' => $id]);
         }
 
@@ -96,8 +96,20 @@ INNER JOIN userjeu uj ON uj.iduser = :idUser WHERE j.id = uj.idjeu');
     {
         $query = $this->conn->prepare('DELETE FROM userjeu WHERE id = :userID;
 DELETE FROM jeu WHERE jeu.Name = :name');
-        $query->execute(['name' => $name, 'userID' => $userID]);
-        return;
+        return $query->execute(['name' => $name, 'userID' => $userID]);
+
+    }
+
+    public function uploadGame($name, $desc, $category, $link, $creatorID)
+    {
+        $query = $this->conn->prepare('INSERT INTO jeu (Name, Description, CategorieID, DownloadLink, creatorID) VALUES (:name, :desc, :category, :link, :creatorID);');
+        return $query->execute([
+            ':name' => $name,
+            ':desc' => $desc,
+            ':category' => $category,
+            ':link' => $link,
+            'creatorID' => $creatorID
+        ]);
     }
 
     public function validationInscription($email, $password, $pseudo)

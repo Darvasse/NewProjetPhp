@@ -9,7 +9,13 @@
 <body>
 <h1>Jeux</h1>
 
+
 <table>
+    <tr>
+        <td>
+            <a href="/poster-jeu"><button>Poster un jeu</button></a>
+        </td>
+    </tr>
     <tr>
         <td><form action="/magasin" method="post">
                 <p>Rechercher un jeu :</p>

@@ -62,6 +62,16 @@ class Routing
            $Controller->modifyGame();
         });
 
+        $this->app->get('/poster-jeu', function () use ($app){
+            $Controller = new SteamController($app);
+            $Controller->renderPostePage();
+        });
+
+        $this->app->post('/poster', function () use ($app){
+           $Controller = new SteamController($app);
+           $Controller->posteGame();
+        });
+
         $this->app->get('/connection', function () use ($app){
             $Controller = new SteamController($app);
             $Controller->renderConnection();

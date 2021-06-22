@@ -46,7 +46,7 @@ class SteamController extends ControllerBase
 
     public function renderProfile()
     {
-        //session_start();
+        session_start();
         $games = $this->app->getService('steamModel')->getDownloadedGames($_SESSION['id']);
         $this->render('profile', ['games' => $games]);
     }
@@ -74,7 +74,7 @@ class SteamController extends ControllerBase
         $id = $_POST['id'];
         $newName = $_POST['name'];
         $newDesc = $_POST['desc'];
-        $newCategory = (int) $_POST['category'];
+        $newCategory = $_POST['category'];
         $newLink = $_POST['link'];
 
         $this->app->getService('steamModel')->modifyGame($id, $newName, $newDesc, $newCategory, $newLink);
@@ -92,6 +92,24 @@ class SteamController extends ControllerBase
         $this->app->getService('steamModel')->deleteGame($name, $_SESSION['id']);
         $this->homeHandler();
     }
+
+    public function renderPostePage()
+    {
+        $this->render('poster');
+    }
+
+    public function posteGame()
+    {
+        session_start();
+        $name = $_POST['name'];
+        $desc = $_POST['desc'];
+        $category = $_POST['category'];
+        $link = $_POST['link'];
+        $creatorID = $_SESSION['id'];
+        $this->app->getService('steamModel')->uploadGame($name, $desc, $category, $link, $creatorID);
+        $this->gamesHandler();
+    }
+
     public function renderConnection()
     {
         $this->render('connection');
